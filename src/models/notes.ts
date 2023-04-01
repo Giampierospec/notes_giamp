@@ -8,6 +8,7 @@ export enum NoteOperations {
 }
 interface INote {
   title: string
+  color?: string
   arithmetics: { operation: NoteOperations; numbers: [number] }
   content?: string
 }
@@ -15,6 +16,7 @@ interface INote {
 const noteSchema = new Schema<INote>({
   title: { type: String, required: true },
   content: { type: String },
+  color: { type: String },
   arithmetics: {
     operation: { type: Number, enum: NoteOperations },
     numbers: [Number],

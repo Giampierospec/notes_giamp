@@ -1,10 +1,11 @@
-import express from 'express'
+import express, { NextFunction } from 'express'
 import { config } from 'dotenv'
 import bodyParser from 'body-parser'
 import path from 'path'
 const cookieSession = require('cookie-session')
 import cors from 'cors'
 import './db/init'
+import { errorHandler } from './middleware/error-handler'
 config()
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -20,6 +21,7 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000,
   })
 )
+app.use(errorHandler)
 if (process.env.NODE_ENV === 'production') {
   // Express will serve Production Assets
   app.use(express.static(`${process.env.BASE_FRONTEND_PATH}/frontend/dist`))
