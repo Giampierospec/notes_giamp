@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose'
+import { performOperations } from '../utils/helpers'
 
 export enum NoteOperations {
   SUM,
@@ -11,8 +12,9 @@ interface INote {
   created?: Date
   updated?: Date
   color?: string
-  arithmetics: { operation: NoteOperations; numbers: [number] }
+  arithmetics: { operation: NoteOperations; numbers: [number]; total?: number }
   content?: string
+  _userId?: Schema.Types.ObjectId
 }
 
 const noteSchema = new Schema<INote>({
@@ -24,7 +26,17 @@ const noteSchema = new Schema<INote>({
   arithmetics: {
     operation: { type: Number, enum: NoteOperations },
     numbers: [Number],
+    total: { type: Number },
   },
+  _userId: { type: Schema.Types.ObjectId },
 })
-
+noteSchema.pre('save', function () {
+  const user = this
+  if (user?.arithmetics?.numbers?.length) {
+    user.arithmetics.total = performOperations(
+      user.arithmetics.operation,
+      user.arithmetics.numbers
+    )
+  }
+})
 export const Notes = model('note', noteSchema)
