@@ -2,7 +2,7 @@ import { Schema, model } from 'mongoose'
 import { hashPassword } from '../utils/encrypt-helper'
 import jwt from 'jsonwebtoken'
 
-interface IUser {
+export interface IUser {
   email: string
   password: string
   firstname: string
