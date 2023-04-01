@@ -30,7 +30,7 @@ const noteSchema = new Schema<INote>({
   },
   _userId: { type: Schema.Types.ObjectId },
 })
-noteSchema.pre('save', function () {
+noteSchema.pre('save', function (next) {
   const user = this
   if (user?.arithmetics?.numbers?.length) {
     user.arithmetics.total = performOperations(
@@ -38,5 +38,6 @@ noteSchema.pre('save', function () {
       user.arithmetics.numbers
     )
   }
+  next()
 })
 export const Notes = model('note', noteSchema)
