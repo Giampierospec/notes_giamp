@@ -6,6 +6,7 @@ const cookieSession = require('cookie-session')
 import cors from 'cors'
 import './db/init'
 import { errorHandler } from './middleware/error-handler'
+import routes from './routes'
 config()
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -21,6 +22,7 @@ app.use(
     maxAge: 24 * 60 * 60 * 1000,
   })
 )
+app.use('/api', ...routes)
 app.use(errorHandler)
 if (process.env.NODE_ENV === 'production') {
   // Express will serve Production Assets
