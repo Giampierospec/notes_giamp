@@ -4,7 +4,7 @@ import Heading from '../components/Heading'
 const NotesPage: React.FC = () => {
   return (
     <FlexDiv direction="column">
-      <Heading variant="h3">Test main Page</Heading>
+      <Heading variant="h2">Test main Page</Heading>
     </FlexDiv>
   )
 }
