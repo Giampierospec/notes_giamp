@@ -6,3 +6,8 @@ export const headerVariants = {
   h5: 'text-md lg:text-lg',
   h6: 'text-sm lg:text-md',
 }
+
+export const customTextMapper = {
+  default: 'text-base lg:text-lg text-slate-600 ',
+  custom: 'text-base',
+}

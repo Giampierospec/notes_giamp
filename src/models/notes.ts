@@ -6,7 +6,10 @@ export interface INote {
   created?: Date
   updated?: Date
   color?: string
-  arithmetics: { description?: string; numbers: [number]; total?: number }
+  arithmetics: {
+    numbers: { description?: string; digits: number }[]
+    total?: number
+  }
   content?: string
   _userId?: Schema.Types.ObjectId
 }
@@ -27,7 +30,9 @@ const noteSchema = new Schema<INote>({
 noteSchema.pre('save', function (next) {
   const user = this
   if (user?.arithmetics?.numbers?.length) {
-    user.arithmetics.total = performNoteSum(user.arithmetics.numbers)
+    user.arithmetics.total = performNoteSum(
+      user.arithmetics.numbers?.map((x) => x.digits)
+    )
   }
   next()
 })
