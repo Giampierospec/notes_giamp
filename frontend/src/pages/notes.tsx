@@ -5,7 +5,7 @@ import Note from '../components/Note'
 const NotesPage: React.FC = () => {
   return (
     <FlexDiv direction="column">
-      <Heading variant="h2">Test main Page</Heading>
+      <Heading variant="h2">My Notes</Heading>
     </FlexDiv>
   )
 }
