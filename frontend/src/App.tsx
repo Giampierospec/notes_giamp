@@ -1,13 +1,10 @@
 import { RouterProvider } from 'react-router-dom'
 import routes from './routes'
 import Container from './components/Container'
+import Navbar from './components/Navbar'
 
 function App() {
-  return (
-    <Container>
-      <RouterProvider router={routes} />
-    </Container>
-  )
+  return <RouterProvider router={routes} />
 }
 
 export default App

@@ -32,7 +32,7 @@ const getNotes = createAsyncThunk('note/getNotes', async () => {
   return data
 })
 
-const getNote = createAsyncThunk('note/getNotes', async (id: string) => {
+const getNote = createAsyncThunk('note/getNote', async (id: string) => {
   const { data } = await client.get(`/api/note/${id}`)
   return data
 })
@@ -75,7 +75,7 @@ const noteSlice = createSlice({
         state.notes = action.payload
       }
     )
-    build.addCase(getNote.rejected, (state, action) => {
+    build.addCase(getNotes.rejected, (state, action) => {
       state.loading = false
       state.notes = []
       toast.error('An error ocurred while fetching the notes', {
@@ -86,7 +86,7 @@ const noteSlice = createSlice({
     build.addCase(getNote.pending, (state, action) => {
       state.loading = true
     })
-    build.addCase(getNotes.fulfilled, (state, action: PayloadAction<Note>) => {
+    build.addCase(getNote.fulfilled, (state, action: PayloadAction<Note>) => {
       state.loading = false
       state.note = action.payload
     })
