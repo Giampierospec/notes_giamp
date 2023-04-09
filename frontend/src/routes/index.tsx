@@ -3,6 +3,7 @@ import NotesPage from '../pages/notes'
 import Layout from '../components/Layout'
 import PrivateRoute from './PrivateRoute'
 import LoginPage from '../pages/login'
+import RegisterPage from '../pages/register'
 
 const routes = createBrowserRouter([
   {
@@ -20,6 +21,14 @@ const routes = createBrowserRouter([
     element: (
       <Layout>
         <LoginPage />
+      </Layout>
+    ),
+  },
+  {
+    path: '/register',
+    element: (
+      <Layout>
+        <RegisterPage />
       </Layout>
     ),
   },
