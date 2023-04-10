@@ -7,6 +7,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { createUser } from '../store/reducers/auth.reducer'
 import { RegisterFormValues } from '../interfaces/auth.interface'
 import RegisterForm from '../components/RegisterForm'
+import Card from '../components/Card'
 
 const RegisterPage: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -23,9 +24,11 @@ const RegisterPage: React.FC = () => {
     [user]
   )
   return (
-    <FlexDiv direction="column" className="justify-center items-center">
-      <Heading>Register</Heading>
-      <RegisterForm onSubmit={onSubmit} />
+    <FlexDiv>
+      <Card className="justify-center items-center">
+        <Heading>Register</Heading>
+        <RegisterForm onSubmit={onSubmit} />
+      </Card>
     </FlexDiv>
   )
 }

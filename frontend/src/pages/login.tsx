@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { loginUser } from '../store/reducers/auth.reducer'
 import { LoginFormValues } from '../interfaces/auth.interface'
+import Card from '../components/Card'
 
 const LoginPage: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -22,10 +23,10 @@ const LoginPage: React.FC = () => {
     [user]
   )
   return (
-    <FlexDiv direction="column" className="justify-center items-center">
+    <Card className="justify-center items-center">
       <Heading>Login</Heading>
       <LoginForm onSubmit={onSubmit} />
-    </FlexDiv>
+    </Card>
   )
 }
 

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import CustomText from '../CustomText'
 import CustomInput from '../CustomInput'
 import CustomButton from '../CustomButton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 interface LoginFormProps {
   onSubmit: (values: LoginFormValues) => void
 }
@@ -27,20 +28,23 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   })
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FlexDiv
-        direction="column"
-        className="p-10 shadow-lg rounded-sm w-fit shadow-stone-400"
-      >
-        <FlexDiv className="justify-between">
-          <CustomText>Email</CustomText>
+      <FlexDiv direction="column" className="p-10">
+        <FlexDiv className="justify-between items-center">
+          <FlexDiv className="items-center">
+            <FontAwesomeIcon icon={['fas', 'envelope']} />
+            <CustomText>Email</CustomText>
+          </FlexDiv>
           <CustomInput
             {...register('email')}
             type="email"
             required={!!errors.email}
           />
         </FlexDiv>
-        <FlexDiv className="justify-between">
-          <CustomText>Password</CustomText>
+        <FlexDiv className="justify-between items-center">
+          <FlexDiv className="items-center">
+            <FontAwesomeIcon icon={['fas', 'lock']} />
+            <CustomText>Password</CustomText>
+          </FlexDiv>
           <CustomInput
             {...register('password')}
             type="password"

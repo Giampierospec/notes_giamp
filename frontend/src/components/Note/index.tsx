@@ -2,6 +2,7 @@ import React from 'react'
 import FlexDiv from '../FlexDiv'
 import Heading from '../Heading'
 import CustomText from '../CustomText'
+import Card from '../Card'
 interface NoteProps {
   title: string
   created?: Date
@@ -26,10 +27,7 @@ const Note = React.forwardRef<
     content,
     ...rest
   }) => (
-    <FlexDiv
-      direction="column"
-      className={`shadow-xl ${color} text-black font-medium rounded-lg p-10 w-256 ${rest.className}`}
-    >
+    <Card {...rest}>
       <Heading className="uppercase">{title}</Heading>
       <CustomText variant="custom" className="italic text-gray-400 text-sm">
         updated: {updated?.toLocaleDateString()}
@@ -49,7 +47,7 @@ const Note = React.forwardRef<
         ))}
       </div>
       <CustomText>Total: {arithmetics?.total}</CustomText>
-    </FlexDiv>
+    </Card>
   )
 )
 

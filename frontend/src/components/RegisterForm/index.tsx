@@ -34,10 +34,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSubmit }) => {
   })
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FlexDiv
-        direction="column"
-        className="p-10 shadow-lg rounded-sm w-fit shadow-stone-400"
-      >
+      <FlexDiv direction="column" className="p-10">
         <FlexDiv className="justify-between">
           <CustomText>First Name</CustomText>
           <CustomInput

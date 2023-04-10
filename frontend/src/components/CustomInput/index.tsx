@@ -7,7 +7,7 @@ const CustomInput = React.forwardRef<
     <input
       ref={ref}
       {...props}
-      className={`form-input  focus:outline-none invalid:border-red-700 invalid:text-red-700 focus:invalid:ring-red-700 focus:invalid:border-red-700 disabled:opacity-75 read-only:bg-gray-500  ${
+      className={`form-input  rounded-md focus:outline-none invalid:border-red-700 invalid:text-red-700 focus:invalid:ring-red-700 focus:invalid:border-red-700 disabled:opacity-75 read-only:bg-gray-500  ${
         props.className ?? ''
       }`}
     />
