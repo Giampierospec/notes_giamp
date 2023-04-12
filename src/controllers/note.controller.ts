@@ -107,3 +107,18 @@ export const updateTitle = async (
     return next(error)
   }
 }
+
+export const deleteNote = async (
+  req: ExpandedRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params
+    const note = await Notes.findOneAndDelete({ _id: id })
+    if (!note) return res.status(404).send('Note not found')
+    return res.status(204).send(note)
+  } catch (error) {
+    return next(error)
+  }
+}

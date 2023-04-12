@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { checkIfIsAuthenticated } from '../middleware/auth'
 import {
   createNotes,
+  deleteNote,
   getNote,
   getNotes,
   updateNote,
@@ -27,6 +28,7 @@ router
     check('title').notEmpty().withMessage('Title is required'),
     updateNote
   )
+  .delete(checkIfIsAuthenticated, deleteNote)
 
 router
   .route('/note/title/:id')
