@@ -45,15 +45,39 @@ const Note = React.forwardRef<
           dangerouslySetInnerHTML={{ __html: content }}
         />
       )}
-      <div className="grid gap-4 grid-cols-2">
-        {arithmetics?.numbers?.map((x, i) => (
-          <>
-            <CustomText>{x.description}</CustomText>
-            <CustomText>{x.digits}</CustomText>
-          </>
-        ))}
-      </div>
-      <CustomText>Total: {arithmetics?.total}</CustomText>
+      {arithmetics?.numbers && arithmetics?.numbers?.length > 0 && (
+        <>
+          <Heading variant="h4">Arithmetics</Heading>
+          <table className="table-auto border-spacing-2  border-collapse border border-slate-500">
+            <thead>
+              <tr className="bg-slate-600 text-white">
+                <th>Description</th>
+                <th>Numbers</th>
+              </tr>
+            </thead>
+            <tbody>
+              {arithmetics?.numbers?.map((x, i) => (
+                <tr key={i}>
+                  <td className="border border-slate-600 px-2">
+                    <CustomText>{x.description}</CustomText>
+                  </td>
+                  <td className="border border-slate-600 px-2">
+                    <CustomText>{x.digits}</CustomText>
+                  </td>
+                </tr>
+              ))}
+              <tr className="bg-slate-700 text-white">
+                <td className="border border-slate-600 px-2">
+                  <CustomText variant="custom">Total:</CustomText>
+                </td>
+                <td className="border border-slate-600 px-2">
+                  <CustomText variant="custom">{arithmetics.total}</CustomText>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      )}
     </Card>
   )
 )
