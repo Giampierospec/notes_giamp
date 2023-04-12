@@ -32,13 +32,7 @@ const NotesPage: React.FC = () => {
       {!loading && notes && notes.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3   gap-4 justify-center">
           {notes?.map((note) => (
-            <CustomLink
-              variants="custom"
-              to={`/note/${note._id}`}
-              key={note._id}
-            >
-              <Note {...note} />
-            </CustomLink>
+            <Note {...note} key={note._id} />
           ))}
         </div>
       )}

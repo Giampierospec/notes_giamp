@@ -4,7 +4,11 @@ import Heading from '../Heading'
 import CustomText from '../CustomText'
 import Card from '../Card'
 import dayjs from 'dayjs'
+import CustomLink from '../CustomLink'
+import CustomButton from '../CustomButton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 interface NoteProps {
+  _id: string
   title: string
   created?: Date
   updated?: Date
@@ -20,6 +24,7 @@ const Note = React.forwardRef<
   NoteProps & React.HTMLAttributes<HTMLDivElement>
 >(
   ({
+    _id,
     title,
     created,
     updated,
@@ -35,7 +40,9 @@ const Note = React.forwardRef<
       >
         {dayjs(created).format('MM/DD/YYYY')}
       </CustomText>
-      <Heading className="uppercase">{title}</Heading>
+      <CustomLink variants="custom" to={`/note/${_id}`}>
+        <Heading className="uppercase">{title}</Heading>
+      </CustomLink>
       <CustomText variant="custom" className="italic text-gray-400 text-sm">
         updated: {dayjs(updated).format('MM/DD/YYYY hh:mm A Z')}
       </CustomText>
@@ -78,6 +85,11 @@ const Note = React.forwardRef<
           </table>
         </>
       )}
+      <FlexDiv className="justify-end">
+        <CustomButton variant="danger" className="rounded-md">
+          <FontAwesomeIcon icon={['fas', 'trash']} />
+        </CustomButton>
+      </FlexDiv>
     </Card>
   )
 )

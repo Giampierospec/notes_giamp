@@ -11,7 +11,7 @@ const Card: React.FC<CardProps & React.HtmlHTMLAttributes<HTMLDivElement>> = ({
     <FlexDiv
       direction="column"
       {...rest}
-      className={`w-[95vw] p-10 shadow-lg rounded-sm md:w-full shadow-stone-400 ${rest.className}`}
+      className={`w-[95vw] p-10 shadow-lg rounded-sm md:w-auto shadow-stone-400 ${rest.className}`}
     >
       {children}
     </FlexDiv>
