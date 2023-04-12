@@ -9,6 +9,7 @@ import { far } from '@fortawesome/free-regular-svg-icons'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import 'react-toastify/dist/ReactToastify.css'
+import 'react-quill/dist/quill.snow.css'
 import { ToastContainer } from 'react-toastify'
 library.add(far, fas, fab)
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
