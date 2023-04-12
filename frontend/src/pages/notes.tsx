@@ -30,7 +30,13 @@ const NotesPage: React.FC = () => {
       </FlexDiv>
       {loading && !notes && <LoadingComponent />}
       {!loading && notes && notes.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3   gap-4 justify-center">
+        <div
+          className={` ${
+            notes.length > 2
+              ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3'
+              : 'flex flex-col md:flex-row'
+          }  gap-4 justify-center`}
+        >
           {notes?.map((note) => (
             <Note {...note} key={note._id} />
           ))}
