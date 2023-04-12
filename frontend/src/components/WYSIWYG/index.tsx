@@ -7,3 +7,4 @@ interface WYSIWYGProps {
 const WYSIWYG: React.FC<WYSIWYGProps> = ({ value, onChange }) => {
   return <ReactQuill value={value} onChange={onChange} />
 }
+export default WYSIWYG
