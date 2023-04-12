@@ -53,6 +53,13 @@ export const updateNote = createAsyncThunk(
     return data
   }
 )
+export const deleteNote = createAsyncThunk(
+  'note/deleteNote',
+  async (id: string) => {
+    const { data } = await client.delete(`/api/note/${id}`)
+    return id
+  }
+)
 export const updateTitle = createAsyncThunk(
   'note/updateTitle',
   async (values: UpdateTitleFormValues) => {
@@ -154,6 +161,26 @@ const noteSlice = createSlice({
     build.addCase(updateTitle.rejected, (state, action) => {
       state.loading = false
       toast.error('An error ocurred while updating the title for the note', {
+        position: 'bottom-center',
+        theme: 'colored',
+      })
+    })
+
+    build.addCase(
+      deleteNote.fulfilled,
+      (state, action: PayloadAction<string>) => {
+        state.loading = false
+        state.notes = state.notes?.filter((x) => x._id !== action.payload)
+        toast.success('Deleted note successfully', {
+          position: 'bottom-center',
+          theme: 'colored',
+        })
+      }
+    )
+
+    build.addCase(deleteNote.rejected, (state, action) => {
+      state.loading = false
+      toast.error(action.error?.message, {
         position: 'bottom-center',
         theme: 'colored',
       })
