@@ -21,8 +21,7 @@ const noteSchema = new Schema<INote>({
   created: { type: Date, default: new Date() },
   updated: { type: Date },
   arithmetics: {
-    description: { type: String },
-    numbers: [Number],
+    numbers: [{ description: String, digits: Number }],
     total: { type: Number },
   },
   _userId: { type: Schema.Types.ObjectId },

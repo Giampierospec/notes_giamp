@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import PrivateRoute from './PrivateRoute'
 import LoginPage from '../pages/login'
 import RegisterPage from '../pages/register'
+import CreateNotePage from '../pages/create-note'
 
 const routes = createBrowserRouter([
   {
@@ -12,6 +13,16 @@ const routes = createBrowserRouter([
       <PrivateRoute>
         <Layout>
           <NotesPage />
+        </Layout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/create-note',
+    element: (
+      <PrivateRoute>
+        <Layout>
+          <CreateNotePage />
         </Layout>
       </PrivateRoute>
     ),

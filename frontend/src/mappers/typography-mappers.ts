@@ -11,3 +11,8 @@ export const customTextMapper = {
   default: 'text-base lg:text-lg text-slate-600 ',
   custom: 'text-base',
 }
+
+export const LinkVariants = {
+  default: 'hover:underline hover:opacity-75 cursor-pointer',
+  custom: 'cursor-pointer hover:opacity-75',
+}

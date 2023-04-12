@@ -6,6 +6,9 @@ import WYSIWYG from '../WYSIWYG'
 import FlexDiv from '../FlexDiv'
 import CustomText from '../CustomText'
 import CustomInput from '../CustomInput'
+import ColorPicker from '../ColorPicker'
+import CustomButton from '../CustomButton'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface NoteFormProps {
   action: keyof typeof noteSchemaActions
@@ -18,7 +21,12 @@ const NoteForm: React.FC<NoteFormProps> = ({
   note,
   onSubmit,
 }) => {
-  const { handleSubmit, register, control } = useForm({
+  const {
+    handleSubmit,
+    register,
+    control,
+    formState: { errors, isSubmitting },
+  } = useForm({
     defaultValues: { ...note },
     resolver: yupResolver(noteSchemaActions[action]),
   })
@@ -27,11 +35,24 @@ const NoteForm: React.FC<NoteFormProps> = ({
     name: 'arithmetics.numbers',
   })
   return (
-    <form onSubmit={handleSubmit(async (values) => await onSubmit(values))}>
+    <form
+      onSubmit={handleSubmit(async (values) => await onSubmit(values))}
+      className="flex flex-col gap-y-2"
+    >
       <FlexDiv direction="column">
         <CustomText>Title</CustomText>
         <CustomInput {...register('title')} />
       </FlexDiv>
+      <Controller
+        control={control}
+        name="color"
+        render={({ field }) => (
+          <FlexDiv className="justify-between items-center">
+            <CustomText>Color</CustomText>
+            <ColorPicker color={field.value ?? ''} setColor={field.onChange} />
+          </FlexDiv>
+        )}
+      />
       <Controller
         control={control}
         name="content"
@@ -42,21 +63,50 @@ const NoteForm: React.FC<NoteFormProps> = ({
           </FlexDiv>
         )}
       />
-      <CustomText>Arithmetics</CustomText>
+      <FlexDiv className="items-center justify-between">
+        <CustomText>Arithmetics</CustomText>
+        <CustomButton
+          variant="secondary"
+          className="rounded-md"
+          type="button"
+          onClick={() =>
+            append({
+              description: '',
+              digits: 0,
+            })
+          }
+        >
+          <FontAwesomeIcon icon={['fas', 'plus']} />
+        </CustomButton>
+      </FlexDiv>
       {fields.map((field, index) => (
         <FlexDiv key={field.id} direction="column">
           <CustomText>Description</CustomText>
           <CustomInput
-            type="number"
+            type="text"
             {...register(`arithmetics.numbers.${index}.description`)}
           />
           <CustomText>Numbers</CustomText>
           <CustomInput
             type="number"
+            step={0.01}
             {...register(`arithmetics.numbers.${index}.digits`)}
           />
+          <FlexDiv className="justify-end">
+            <CustomButton
+              variant="danger"
+              className="rounded-md"
+              onClick={() => remove(index)}
+              type="button"
+            >
+              <FontAwesomeIcon icon={['fas', 'trash']} />
+            </CustomButton>
+          </FlexDiv>
         </FlexDiv>
       ))}
+      <CustomButton loading={isSubmitting} type="submit">
+        Create
+      </CustomButton>
     </form>
   )
 }

@@ -6,7 +6,7 @@ import CustomLink from '../CustomLink'
 
 const Navbar: React.FC = () => {
   return (
-    <FlexDiv className="justify-between sticky top-0 pt-4 pb-2 px-2 shadow-md rounded-sm">
+    <FlexDiv className="justify-between sticky top-0 pt-4 pb-2 px-2 shadow-md rounded-sm bg-white">
       <CustomLink to="/">
         <Heading variant="h1">Notes</Heading>
       </CustomLink>

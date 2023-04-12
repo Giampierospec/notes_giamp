@@ -27,30 +27,33 @@ interface NoteR {
 }
 const initialState: NoteR = {}
 
-const getNotes = createAsyncThunk('note/getNotes', async () => {
+export const getNotes = createAsyncThunk('note/getNotes', async () => {
   const { data } = await client.get('/api/notes')
   return data
 })
 
-const getNote = createAsyncThunk('note/getNote', async (id: string) => {
+export const getNote = createAsyncThunk('note/getNote', async (id: string) => {
   const { data } = await client.get(`/api/note/${id}`)
   return data
 })
 
-const createNote = createAsyncThunk(
+export const createNote = createAsyncThunk(
   'note/createNote',
-  async (values: CreateNoteFormValues) => {
+  async (values: Partial<CreateNoteFormValues>) => {
     const { data } = await client.post('/api/notes', { ...values })
 
     return data
   }
 )
-const updateNote = createAsyncThunk('note/updateNote', async (values: Note) => {
-  const { data } = await client.post(`/api/note/${values._id}`, { ...values })
+export const updateNote = createAsyncThunk(
+  'note/updateNote',
+  async (values: Note) => {
+    const { data } = await client.post(`/api/note/${values._id}`, { ...values })
 
-  return data
-})
-const updateTitle = createAsyncThunk(
+    return data
+  }
+)
+export const updateTitle = createAsyncThunk(
   'note/updateTitle',
   async (values: UpdateTitleFormValues) => {
     const { data } = await client.patch(`/api/note/title/${values.id}`, {

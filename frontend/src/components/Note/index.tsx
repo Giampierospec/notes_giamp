@@ -3,6 +3,7 @@ import FlexDiv from '../FlexDiv'
 import Heading from '../Heading'
 import CustomText from '../CustomText'
 import Card from '../Card'
+import dayjs from 'dayjs'
 interface NoteProps {
   title: string
   created?: Date
@@ -22,15 +23,21 @@ const Note = React.forwardRef<
     title,
     created,
     updated,
-    color = 'bg-white',
+    color = '#FFF',
     arithmetics,
     content,
     ...rest
   }) => (
-    <Card {...rest}>
+    <Card className={`bg-[${color}] ${rest.className}`}>
+      <CustomText
+        variant="custom"
+        className="italic text-gray-400 text-sm flex justify-end"
+      >
+        {dayjs(created).format('MM/DD/YYYY')}
+      </CustomText>
       <Heading className="uppercase">{title}</Heading>
       <CustomText variant="custom" className="italic text-gray-400 text-sm">
-        updated: {updated?.toLocaleDateString()}
+        updated: {dayjs(updated).format('MM/DD/YYYY hh:mm A Z')}
       </CustomText>
       {content && (
         <div
