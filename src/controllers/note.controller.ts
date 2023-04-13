@@ -50,6 +50,7 @@ export const createNotes = async (
     const note = await Notes.create({
       ...noteBody,
       created: new Date(),
+      updated: new Date(),
       _userId: req.user?._id,
     })
     return res.status(200).send(note)
