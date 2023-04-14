@@ -39,6 +39,7 @@ const NoteForm: React.FC<NoteFormProps> = ({
       onSubmit={handleSubmit(async (values) => await onSubmit(values))}
       className="flex flex-col gap-y-2"
     >
+      {note && note._id && <CustomInput type="hidden" {...register('_id')} />}
       <FlexDiv direction="column">
         <CustomText>Title</CustomText>
         <CustomInput {...register('title')} />

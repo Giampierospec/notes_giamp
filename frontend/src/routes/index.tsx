@@ -5,6 +5,7 @@ import PrivateRoute from './PrivateRoute'
 import LoginPage from '../pages/login'
 import RegisterPage from '../pages/register'
 import CreateNotePage from '../pages/create-note'
+import UpdateNotePage from '../pages/update-note'
 
 const routes = createBrowserRouter([
   {
@@ -23,6 +24,16 @@ const routes = createBrowserRouter([
       <PrivateRoute>
         <Layout>
           <CreateNotePage />
+        </Layout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/update-note/:id',
+    element: (
+      <PrivateRoute>
+        <Layout>
+          <UpdateNotePage />
         </Layout>
       </PrivateRoute>
     ),
