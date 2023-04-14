@@ -106,7 +106,7 @@ const NoteForm: React.FC<NoteFormProps> = ({
         </FlexDiv>
       ))}
       <CustomButton loading={isSubmitting} type="submit">
-        Create
+        {action}
       </CustomButton>
     </form>
   )
