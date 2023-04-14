@@ -47,7 +47,7 @@ const Note = React.forwardRef<
         >
           {dayjs(created).format('MM/DD/YYYY')}
         </CustomText>
-        <CustomLink variants="custom" to={`/note/${_id}`}>
+        <CustomLink variants="custom" to={`/update-note/${_id}`}>
           <Heading className="uppercase">{title}</Heading>
         </CustomLink>
         <CustomText variant="custom" className="italic text-gray-400 text-sm">

@@ -9,7 +9,7 @@ import { createNote, getNote, updateNote } from '../store/reducers/note.reducer'
 
 const UpdateNotePage: React.FC = () => {
   const dispatch = useAppDispatch()
-  const { notes, note } = useAppSelector((state) => state.note)
+  const { notes, note, loading } = useAppSelector((state) => state.note)
   const navigate = useNavigate()
   const { id } = useParams()
   const updateNotes = useCallback(
@@ -27,11 +27,13 @@ const UpdateNotePage: React.FC = () => {
   return (
     <Card>
       <Heading>Update Note #{id}</Heading>
-      <NoteForm
-        action="update"
-        note={note as CreateNoteFormValues}
-        onSubmit={updateNotes}
-      />
+      {note && !loading && (
+        <NoteForm
+          action="update"
+          note={note as CreateNoteFormValues}
+          onSubmit={updateNotes}
+        />
+      )}
     </Card>
   )
 }

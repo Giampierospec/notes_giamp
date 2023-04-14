@@ -19,6 +19,9 @@ const LoginPage: React.FC = () => {
   const onSubmit = useCallback(
     async (values: LoginFormValues) => {
       await dispatch(loginUser(values))
+      if (user) {
+        navigate(search.get('returnUrl') ?? '/')
+      }
     },
     [user]
   )

@@ -48,7 +48,7 @@ export const createNote = createAsyncThunk(
 export const updateNote = createAsyncThunk(
   'note/updateNote',
   async (values: Partial<CreateNoteFormValues>) => {
-    const { data } = await client.post(`/api/note/${values._id}`, { ...values })
+    const { data } = await client.put(`/api/note/${values._id}`, { ...values })
 
     return data
   }
