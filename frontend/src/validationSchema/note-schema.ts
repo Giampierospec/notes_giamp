@@ -9,7 +9,12 @@ const updateSchema = Yup.object({
   title: Yup.string().required('Title is required'),
 })
 
+const updateTitleSchema = Yup.object({
+  title: Yup.string().required('Title is required'),
+})
+
 export const noteSchemaActions = {
   create: createSchema,
   update: updateSchema,
+  updateTitle: updateTitleSchema,
 }
