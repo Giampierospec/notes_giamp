@@ -6,6 +6,7 @@ import LoginPage from '../pages/login'
 import RegisterPage from '../pages/register'
 import CreateNotePage from '../pages/create-note'
 import UpdateNotePage from '../pages/update-note'
+import NotFoundPage from '../pages/404'
 
 const routes = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ const routes = createBrowserRouter([
     element: (
       <Layout>
         <RegisterPage />
+      </Layout>
+    ),
+  },
+  {
+    path: '*',
+    element: (
+      <Layout>
+        <NotFoundPage />
       </Layout>
     ),
   },
