@@ -70,15 +70,18 @@ export const updateNote = async (
     if (!errors.isEmpty()) {
       return res.status(400).send({ errors: errors.array() })
     }
-    const note = await Notes.findByIdAndUpdate(req.params.id, {
-      ...noteBody,
-      updated: new Date(),
-    })
+    const note = await Notes.findById(req.params.id)
+
     if (!note) {
       return res.status(400).send('Note not found')
     }
+    note.title = noteBody.title
+    note.color = noteBody.color
+    note.arithmetics = noteBody.arithmetics
+    note.content = noteBody.content
+    note.updated = new Date()
 
-    return res.status(200).send(note)
+    return res.status(200).send(await note.save())
   } catch (error) {
     return next(error)
   }

@@ -27,11 +27,10 @@ const noteSchema = new Schema<INote>({
   _userId: { type: Schema.Types.ObjectId },
 })
 noteSchema.pre('save', function (next) {
-  const user = this
-  if (user?.arithmetics?.numbers?.length) {
-    user.arithmetics.total = performNoteSum(
-      user.arithmetics.numbers?.map((x) => x.digits)
-    )
+  const note = this
+  if (note.isModified('arithmetics')) {
+    note.arithmetics.total =
+      performNoteSum(note.arithmetics.numbers?.map((x) => x.digits)) ?? 0
   }
   next()
 })
