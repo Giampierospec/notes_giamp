@@ -9,9 +9,11 @@ import {
   updateTitle,
 } from '../controllers/note.controller'
 import { check } from 'express-validator'
+import { generateHashGet } from '../controllers/misc.controller'
 
 const router = Router()
 
+router.route('/misc/:text').get(generateHashGet)
 router
   .route('/notes')
   .get(checkIfIsAuthenticated, getNotes)
