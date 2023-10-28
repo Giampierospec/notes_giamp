@@ -1,32 +1,33 @@
-import React, { useCallback } from 'react'
-import FlexDiv from '../FlexDiv'
-import Heading from '../Heading'
-import CustomText from '../CustomText'
-import Card from '../Card'
-import dayjs from 'dayjs'
-import CustomLink from '../CustomLink'
-import CustomButton from '../CustomButton'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useAppDispatch } from '../../store/hooks'
-import { deleteNote, updateTitle } from '../../store/reducers/note.reducer'
-import useOpen from '../../hooks/useOpen'
-import Modal from '../Modal'
-import CustomInput from '../CustomInput'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { noteSchemaActions } from '../../validationSchema/note-schema'
-import { UpdateTitleFormValues } from '../../interfaces/note.interface'
+import React, { useCallback } from 'react';
+import FlexDiv from '../FlexDiv';
+import Heading from '../Heading';
+import CustomText from '../CustomText';
+import Card from '../Card';
+import dayjs from 'dayjs';
+import CustomLink from '../CustomLink';
+import CustomButton from '../CustomButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useAppDispatch } from '../../store/hooks';
+import { deleteNote, updateTitle } from '../../store/reducers/note.reducer';
+import useOpen from '../../hooks/useOpen';
+import Modal from '../Modal';
+import CustomInput from '../CustomInput';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { noteSchemaActions } from '../../validationSchema/note-schema';
+import { UpdateTitleFormValues } from '../../interfaces/note.interface';
+import { formatCurrency } from '../../helpers/utils.helper';
 interface NoteProps {
-  _id: string
-  title: string
-  created?: Date
-  updated?: Date
-  color?: string
+  _id: string;
+  title: string;
+  created?: Date;
+  updated?: Date;
+  color?: string;
   arithmetics: {
-    numbers: { description?: string; digits: number }[]
-    total?: number
-  }
-  content?: string
+    numbers: { description?: string; digits: number }[];
+    total?: number;
+  };
+  content?: string;
 }
 const Note = React.forwardRef<
   HTMLDivElement,
@@ -42,11 +43,11 @@ const Note = React.forwardRef<
     content,
     ...rest
   }) => {
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
     const onDelete = useCallback(async () => {
-      await dispatch(deleteNote(_id))
-    }, [])
-    const { isOpen, onOpen, onClose } = useOpen()
+      await dispatch(deleteNote(_id));
+    }, []);
+    const { isOpen, onOpen, onClose } = useOpen();
     const {
       register,
       formState: { errors, isSubmitting },
@@ -54,14 +55,15 @@ const Note = React.forwardRef<
     } = useForm<{ title: string }>({
       defaultValues: { title },
       resolver: yupResolver(noteSchemaActions['updateTitle']),
-    })
+    });
     const updateTitleAction = useCallback(
       async (values: UpdateTitleFormValues) => {
-        await dispatch(updateTitle(values))
-        onClose()
+        await dispatch(updateTitle(values));
+        onClose();
       },
       []
-    )
+    );
+
     return (
       <>
         <Card className={`bg-[${color}] ${rest.className}`}>
@@ -110,7 +112,7 @@ const Note = React.forwardRef<
                         <CustomText>{x.description}</CustomText>
                       </td>
                       <td className="border border-slate-600 px-2">
-                        <CustomText>{x.digits}</CustomText>
+                        <CustomText>{formatCurrency(x.digits)}</CustomText>
                       </td>
                     </tr>
                   ))}
@@ -120,7 +122,7 @@ const Note = React.forwardRef<
                     </td>
                     <td className="border border-slate-600 px-2">
                       <CustomText variant="custom">
-                        {arithmetics.total}
+                        {formatCurrency(arithmetics.total)}
                       </CustomText>
                     </td>
                   </tr>
@@ -156,8 +158,8 @@ const Note = React.forwardRef<
           </form>
         </Modal>
       </>
-    )
+    );
   }
-)
+);
 
-export default Note
+export default Note;
